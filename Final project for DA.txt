@@ -86,7 +86,7 @@ Part 3 Aggregations
  }
 }]
 
-4. [MOVIES] Sort movies with the lowest score on the rotten tomatoe meter first
+4. [MOVIES] Sort movies with a rotten tomatoe meter score from worst to best
 
 [{
  $project: {
