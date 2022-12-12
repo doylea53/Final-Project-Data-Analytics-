@@ -27,13 +27,6 @@ Part 3 Aggregations
 
 [
   {
-    $project: {
-      name: 1,
-      _id: 0,
-      surfaceTemperatureC: 1,
-    },
-  },
-  {
     $unwind: {
       path: "$surfaceTemperatureC",
     },
