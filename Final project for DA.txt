@@ -85,3 +85,32 @@ Part 3 Aggregations
   }
  }
 }]
+
+4. [MOVIES] Sort movies with the lowest score on the tomatoe meter first
+
+[{
+ $project: {
+  _id: 0,
+  title: 1,
+  tomatoes: 1
+ }
+}, {
+ $unwind: {
+  path: '$tomatoes'
+ }
+}, {
+ $project: {
+  title: 1,
+  tomatoe_meter: '$tomatoes.viewer.meter'
+ }
+}, {
+ $sort: {
+  tomatoe_meter: 1
+ }
+}, {
+ $match: {
+  tomatoe_meter: {
+   $gte: 1
+  }
+ }
+}]
