@@ -23,7 +23,7 @@ Part 2 Queries
 
 Part 3 Aggregations
 
-1. Sorts average temperature of planets highest to lowest
+1. [PLANETS] Sorts average temperature of planets highest to lowest
 
 [
   {
@@ -45,7 +45,7 @@ Part 3 Aggregations
   },
 ]
 
-2. Elements and number of planets they are in
+2. [PLANETS] Elements and number of planets they are in
 
 [{
  $unwind: {
@@ -56,6 +56,32 @@ Part 3 Aggregations
   _id: '$mainAtmosphere',
   planets: {
    $sum: 1
+  }
+ }
+}]
+
+3. [MOVIES] Shows movies with an IMDB score of 9 and above
+
+[{
+ $project: {
+  _id: 0,
+  title: 1,
+  imdb: 1
+ }
+}, {
+ $unwind: {
+  path: '$imdb'
+ }
+}, {
+ $project: {
+  title: 1,
+  movie_rating: '$imdb.rating',
+  number_of_scores: '$imdb.votes'
+ }
+}, {
+ $match: {
+  movie_rating: {
+   $gte: 9
   }
  }
 }]
