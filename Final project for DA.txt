@@ -1,0 +1,53 @@
+Part 2 Queries
+
+1. Order of planets furthest to closest to the sun
+
+>sort
+{orderFromSun: -1}
+
+2. Filter planets that have rings
+
+>filter
+{hasRings: true}
+
+3. Planets by alphabetical order
+
+>sort
+{name: 1}
+
+4. Order of planets closest to furthest from the sun that don't have rings
+
+{hasRings: false}
+{orderFromSun: 1}
+
+
+Part 3 Aggregations
+
+1. Sort temperature of planets highest to lowest
+
+[
+  {
+    $project: {
+      name: 1,
+      _id: 0,
+      surfaceTemperatureC: 1,
+    },
+  },
+  {
+    $unwind: {
+      path: "$surfaceTemperatureC",
+    },
+  },
+  {
+    $sort: {
+      "surfaceTemperatureC.mean": -1,
+    },
+  },
+  {
+    $project: {
+      name: 1,
+      _id: 0,
+      temparture: "$surfaceTemperatureC.mean",
+    },
+  },
+]
