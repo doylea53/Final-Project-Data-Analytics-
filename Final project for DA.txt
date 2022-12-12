@@ -44,3 +44,18 @@ Part 3 Aggregations
     },
   },
 ]
+
+2. Elements and number of planets they are in
+
+[{
+ $unwind: {
+  path: '$mainAtmosphere'
+ }
+}, {
+ $group: {
+  _id: '$mainAtmosphere',
+  planets: {
+   $sum: 1
+  }
+ }
+}]
