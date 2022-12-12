@@ -23,7 +23,7 @@ Part 2 Queries
 
 Part 3 Aggregations
 
-1. Sort temperature of planets highest to lowest
+1. Sorts average temperature of planets highest to lowest
 
 [
   {
